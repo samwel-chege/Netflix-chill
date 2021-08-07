@@ -1,14 +1,21 @@
-from app import app
+# from app import app
 import urllib.request,json
-from .models import movie
+from .model import movie
 
-Movie = movie.Movie
+
+# Movie = movie.Movie
 
 #getting api key
-api_key = app.config['MOVIE_API_KEY']
+api_key = None
+
 
 #Getting the movie base url
-base_url = app.config["MOVIE_API_BASE_URL"]
+base_url = None
+
+def configure_request(app):
+    global api_key, base_url
+    api_key = app.config['MOVIE_API_KEY']
+    base_url = app.config['MOVIE_API_BASE_URL']
 
 def get_movies(category):
     '''
@@ -44,7 +51,7 @@ def get_movie(id):
             vote_average = movie_details_response.get('vote_average')
             vote_count = movie_details_response.get('vote_count')
 
-            movie_object = Movie(id,title,overview,poster,vote_average,vote_count)
+            movie_object = movie(id,title,overview,poster,vote_average,vote_count)
 
     return movie_object    
 
@@ -69,7 +76,7 @@ def process_results(movie_list):
         vote_count = movie_item.get('vote_count')
 
         if poster:
-            movie_object = Movie(id,title,overview,poster,vote_average,vote_count) 
+            movie_object = movie(id,title,overview,poster,vote_average,vote_count) 
             movie_results.append(movie_object)     
 
     return movie_results 
@@ -82,7 +89,9 @@ def search_movie(movie_name):
 
         search_movie_results = None
 
-        if search_movie_response['results']:
-            search_movie_list = search_movie_response['results']
-            search_movie_results = process_results(search_movie_list) 
+    if search_movie_response['results']:
+        search_movie_list = search_movie_response['results']
+        search_movie_results = process_results(search_movie_list) 
+
+    return search_movie_results 
 
