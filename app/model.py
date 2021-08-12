@@ -16,6 +16,7 @@ class Role(db.Model):
 
     id = db.Column(db.Interger,primary_key = True) 
     name = db.Column(db.String(255))
+    users = db.relationship('User', backref = 'role', lazy = "dynamic")
 
     def ___repr__(self):
         return f'User {self.name}'   
