@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField
+from wtforms import StringField,PasswordField,SubmitField,BooleanField
 from wtforms import validators
 from wtforms.validators import Required,Email,EqualTo
 from ..model import User
@@ -27,3 +27,9 @@ class RegistrationForm(FlaskForm):
             '''
             function that checks to see if the useraname is unique  and raises a validate error if another user with a similar username is found 
             '''
+
+class LoginForm(FlaskForm):
+    email = StringField('Your Email Address',validators=[Required(),Email()]) 
+    password = PasswordField('Password',validators=[Required()])   
+    remember = BooleanField('Remember me')    
+    submit = SubmitField('Sign In')    
