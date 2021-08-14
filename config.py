@@ -9,6 +9,7 @@ class Config:
     MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://sammie:samm@localhost/watchlist'
+    UPLOADED_PHOTOS_DEST = 'app/static/photos'
 
     @staticmethod
     def init_app(app):
