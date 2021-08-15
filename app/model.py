@@ -46,7 +46,7 @@ class Role(db.Model):
     def ___repr__(self):
         return f'User {self.name}'   
 
-class Review(db.model):
+class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer,primary_key = True)
