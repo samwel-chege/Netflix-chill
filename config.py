@@ -1,5 +1,7 @@
 import os
 
+from flask_simplemde import SimpleMDE
+
 
 class Config:
     '''
@@ -17,6 +19,12 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+
+    #simplemde configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLE_USE_CDN = True
+     
+
 
     @staticmethod
     def init_app(app):
